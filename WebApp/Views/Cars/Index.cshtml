@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebApp.Models.Car>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+<br />
+<h2>Cars available</h2>
+
+
+<form asp-controller="Cars" asp-action="Index">
+    <div class=" col-lg-3 col-md-3 col-sm-4 col-xs-5 search">
+        <p>Here you can search on car models:</p>
+        <input type="text" class="form-control "name="SearchString">
+       <br />
+        <input type="submit" value="Search" class="btn btn-info" />
+        </div>
+
+</form>
+
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hk)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+               
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
