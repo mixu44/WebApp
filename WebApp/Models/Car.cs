@@ -25,7 +25,7 @@ namespace WebApp.Models
         [Range(1, 2000000)]
         [DataType(DataType.Currency)]
         [Required]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
 
 

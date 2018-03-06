@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using WebApp.Interfaces;
+using WebApp.Services;
 
 namespace WebApp
 {
@@ -24,6 +26,8 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddTransient<IDateTime, SystemDateTime>();
 
             services.AddDbContext<WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("WebAppContext")));

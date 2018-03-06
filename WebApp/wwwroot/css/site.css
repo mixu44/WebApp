@@ -22,6 +22,11 @@
     text-align: center;
 }
 
+.headline h2 {
+    text-align: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
 .homepagebuttons {
     padding-top: 50px;
 }

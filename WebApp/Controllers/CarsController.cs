@@ -10,13 +10,15 @@ namespace WebApp.Controllers
     {
         private readonly WebAppContext _context;
 
+
+        // Here i use Dependency injection in the contructor.
+        // I use the databse context ind each of the CRUD methods in this controller
         public CarsController(WebAppContext context)
         {
             _context = context;
         }
 
-        // GET: Cars
-        
+        // GET: Cars        
         public async Task<IActionResult> Index(string searchString)
         {
 
