@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApp.Models.CarViewModel;
 
 namespace WebApp.Controllers
 {
@@ -19,18 +21,30 @@ namespace WebApp.Controllers
         }
 
         // GET: Cars        
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string CarModel)
         {
+            IQueryable<string> modelQuery = from c in _context.Car
+                                            orderby c.Model
+                                            select c.Model;
 
             var cars = from c in _context.Car
                       select c;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                cars = cars.Where(x => x.Model.Contains(searchString));
+                cars = cars.Where(x => x.Brand.Contains(searchString));
+            }
+            if (!string.IsNullOrEmpty(CarModel))
+            {
+                cars = cars.Where(x => x.Model == CarModel);
             }
 
-            return View(await cars.ToListAsync());
+
+            var carVM = new CarViewModel();
+            carVM.models = new SelectList(await modelQuery.Distinct().ToListAsync());
+            carVM.cars = await cars.ToListAsync();
+
+            return View(carVM);
         }
 
         // GET: Cars/Details/5

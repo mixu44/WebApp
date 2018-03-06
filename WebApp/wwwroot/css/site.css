@@ -27,8 +27,18 @@
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
+.webapp h4{
+    font-style: oblique;
+    padding-top:100px;
+    text-align:center;
+}
+
 .homepagebuttons {
     padding-top: 50px;
+}
+
+.btnhome{
+    width:200px;
 }
 
 .contact {
