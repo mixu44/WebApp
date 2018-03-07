@@ -21,11 +21,8 @@ namespace WebApp.Controllers
         }
 
         // GET: Cars        
-        public async Task<IActionResult> Index(string searchString, string CarModel)
+        public async Task<IActionResult> Index(string searchString)
         {
-            IQueryable<string> modelQuery = from c in _context.Car
-                                            orderby c.Model
-                                            select c.Model;
 
             var cars = from c in _context.Car
                       select c;
@@ -34,14 +31,10 @@ namespace WebApp.Controllers
             {
                 cars = cars.Where(x => x.Brand.Contains(searchString));
             }
-            if (!string.IsNullOrEmpty(CarModel))
-            {
-                cars = cars.Where(x => x.Model == CarModel);
-            }
 
 
             var carVM = new CarViewModel();
-            carVM.models = new SelectList(await modelQuery.Distinct().ToListAsync());
+          
             carVM.cars = await cars.ToListAsync();
 
             return View(carVM);

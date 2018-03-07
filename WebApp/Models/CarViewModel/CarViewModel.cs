@@ -8,10 +8,7 @@ namespace WebApp.Models.CarViewModel
 {
     public class CarViewModel
     {
-
         public List<Car> cars;
-        public SelectList models;
-        public string carModels { get; set; }
 
     }
 }
